@@ -1,0 +1,8 @@
+<config>
+  <modules>
+    <Juno_Jcoupon>
+      <active>true</active>
+      <codePool>local</codePool>
+    </Juno_Jcoupon>
+  </modules>
+</config>

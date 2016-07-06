@@ -1,0 +1,21 @@
+<config>
+	<global>
+		<models>
+			<jcoupon>
+				<class>Juno_Jcoupon_Model</class>
+			</jcoupon>
+		</models>
+
+		<blocks>
+			<jcoupon>
+				<class>Juno_Jcoupon_Block</class>
+			</jcoupon>
+		</blocks>
+
+		<helpers>
+			<jcoupon>
+				<class>Juno_Jcoupon_Helper</class>
+			</jcoupon>
+		</helpers>
+	</global>
+</config>
