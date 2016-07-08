@@ -133,12 +133,49 @@ class Mage_Checkout_CartController extends Mage_Core_Controller_Front_Action
         return $this;
     }
 
+    public function validateCouponCodeForCart($cart)
+    {
+        $couponCode = '25OFF';//
+        $couponCode ='evening15';
+        $count = $cart->getQuote()->getItemsCount();
+        // $couponCode = '';
+        print_r($count);
+        try {
+            $codeLength = strlen($couponCode);
+            $isCodeLengthValid = $codeLength && $codeLength <= Mage_Checkout_Helper_Cart::COUPON_CODE_MAX_LENGTH;
+
+            $cart->getQuote()->getShippingAddress()->setCollectShippingRates(true);
+            $cart->getQuote()->setCouponCode($isCodeLengthValid ? $couponCode : '')
+                ->collectTotals()
+                ->save();
+            echo "length:".$codeLength;
+            if ($codeLength) {
+                if ($isCodeLengthValid && $couponCode == $cart->getQuote()->getCouponCode()) {
+                    print_r("valid");
+                } else {
+                    print_r("Invalid");
+                }
+            } else {
+                
+                print_r("canceled");
+            }
+
+        } catch (Mage_Core_Exception $e) {
+            // $cart->_getSession()->addError($e->getMessage());
+        } catch (Exception $e) {
+
+            // $cart->_getSession()->addError($cart->__('Cannot apply the coupon code.'));
+            Mage::logException($e);
+        }
+    }
     /**
      * Shopping cart display action
      */
     public function indexAction()
     {
         $cart = $this->_getCart();
+        $this->validateCouponCodeForCart($cart);
+        // exit();
         if ($cart->getQuote()->getItemsCount()) {
             $cart->init();
             $cart->save();
@@ -171,7 +208,9 @@ class Mage_Checkout_CartController extends Mage_Core_Controller_Front_Action
          * as modified bc he can has checkout page in another window.
          */
         $this->_getSession()->setCartWasUpdated(true);
-
+// echo "Mage_Checkout_CartController";
+// print_r($cart->getQuote());
+// exit;
         Varien_Profiler::start(__METHOD__ . 'cart_display');
         $this
             ->loadLayout()
