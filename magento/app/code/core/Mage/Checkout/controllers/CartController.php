@@ -136,7 +136,7 @@ class Mage_Checkout_CartController extends Mage_Core_Controller_Front_Action
     public function validateCouponCodeForCart($cart)
     {
         $couponCode = '25OFF';//
-        $couponCode ='evening15';
+        //$couponCode ='evening15';
         $count = $cart->getQuote()->getItemsCount();
         // $couponCode = '';
         print_r($count);
@@ -174,7 +174,7 @@ class Mage_Checkout_CartController extends Mage_Core_Controller_Front_Action
     public function indexAction()
     {
         $cart = $this->_getCart();
-        $this->validateCouponCodeForCart($cart);
+//        $this->validateCouponCodeForCart($cart);
         // exit();
         if ($cart->getQuote()->getItemsCount()) {
             $cart->init();
