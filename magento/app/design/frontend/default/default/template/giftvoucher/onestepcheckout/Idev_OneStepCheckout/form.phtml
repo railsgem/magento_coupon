@@ -80,7 +80,7 @@
         <?php endif ?>
         <dt class="<?php echo $_code ?>">
         <input type="checkbox" name="payment[<?php echo $_code ?>]" id="<?php echo $_code ?>" onclick="changeUseGiftvoucher(this);"<?php if ($this->getUseGiftVoucher()): ?> checked="checked"<?php endif ?> />
-        <label for="<?php echo $_code ?>" style="font-weight: bold; color: #666;"><?php echo $this->__('Use Gift Card to check out') ?></label>
+        <label for="<?php echo $_code ?>" style="font-weight: bold; color: #666;"><?php echo $this->__('Use Gift Card to check out') ?></label>aaa
         <p id="<?php echo $_code ?>_ajaxload" style="display:none; font-weight: normal; font-style: italic;">
             <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Loading...') ?>" title="<?php echo $this->__('Loading...') ?>" class="v-middle" />
             <?php echo $this->__('Loading...') ?>

@@ -309,7 +309,7 @@
             <action method="addLink" ifconfig="giftvoucher/general/active" translate="label" module="giftvoucher">
                 <name>giftvoucher</name>
                 <path>giftvoucher/index/index</path>
-                <label>Gift Card</label>
+                <label>我的优惠券</label>
             </action>
         </reference>
     </customer_account>
