@@ -24,10 +24,50 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
+
 <?php echo $this->getMessagesBlock()->toHtml() ?>
 <div class="page-title">
     <h1><?php echo $this->__('My Product Reviews') ?></h1>
 </div>
+待评论列表：</br>
+<?php 
+
+$orders = $this->getCompletedOrderDetail(); 
+
+?>
+<table class="data-table" id="my-reviews-table">
+    <col width="1" />
+    <col width="1" />
+    <col width="1" />
+    <col />
+    <col width="1" />
+    <tbody>
+        <?php 
+        $order_detail = array();
+        $order_detail_list = array();
+        foreach ($orders as $order) { ?>
+        <?php 
+            $order_id = $order->getId();
+            $order_detail = $this->getOrderDetailById($order_id, $order_detail);
+
+            foreach ($order_detail as $product) {
+                ?>
+            <tr>
+                <td><img src="<?php echo $product["image_url"]; ?>"/></td>
+                <td><?php echo $product["name"]; ?></td>
+                <td><?php echo $product["incrementId"]; ?></td>
+                <td><?php echo $product["qty_ordered"]; ?></td>
+                <td><?php echo $product["create_at"]; ?></td>
+                <td><?php echo $product["item_id"];echo "待评价" ?></td>
+            </tr>
+                <?php 
+            }
+        }
+
+         ?>
+    </tbody>
+</table>
+
 <?php if( $this->getCollection() && $this->count()): ?>
     <?php echo $this->getToolbarHtml() ?>
         <table class="data-table" id="my-reviews-table">
