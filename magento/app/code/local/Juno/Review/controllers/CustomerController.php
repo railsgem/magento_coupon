@@ -31,8 +31,8 @@
  * @package     Mage_Review
  * @author      Magento Core Team <core@magentocommerce.com>
  */
-
-class Mage_Review_CustomerController extends Mage_Core_Controller_Front_Action
+require_once 'Mage/Review/controllers/CustomerController.php';
+class Juno_Review_CustomerController extends Mage_Review_CustomerController
 {
     /**
      * Action predispatch
@@ -48,7 +48,7 @@ class Mage_Review_CustomerController extends Mage_Core_Controller_Front_Action
     }
 
     public function indexAction()
-    {echo "string";
+    {
         $this->loadLayout();
         $this->_initLayoutMessages('catalog/session');
 
@@ -72,5 +72,16 @@ class Mage_Review_CustomerController extends Mage_Core_Controller_Front_Action
         }
         $this->getLayout()->getBlock('head')->setTitle($this->__('Review Details'));
         $this->renderLayout();
+    }
+
+    public function newAction()
+    {
+        $this->loadLayout();
+        if ($navigationBlock = $this->getLayout()->getBlock('customer_account_navigation')) {
+            $navigationBlock->setActive('review/customer');
+        }
+        $this->getLayout()->getBlock('head')->setTitle($this->__('新评论'));
+        $this->renderLayout();
+       
     }
 }

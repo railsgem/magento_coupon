@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Juno_Review>
+            <version>0.1.0</version>
+        </Juno_Review>
+    </modules>
+    <frontend>
+        <routers>
+            <review>
+                <args>
+                    <modules>
+                        <Juno_Review before="Mage_Review">Juno_Review</Juno_Review>
+                    </modules>
+                </args>
+            </review>
+        </routers>
+    </frontend>
+</config>
