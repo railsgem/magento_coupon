@@ -58,7 +58,7 @@ $orders = $this->getCompletedOrderDetail();
                 <td><?php echo $product["incrementId"]; ?></td>
                 <td><?php echo $product["qty_ordered"]; ?></td>
                 <td><?php echo $product["create_at"]; ?></td>
-                <td><?php echo $product["item_id"];echo "待评价" ?></td>
+                <td><a href="new/id/<?php echo $product["product_id"]?>/item_id/<?php echo $product["item_id"]?>"><?php echo "待评价" ?></a></td>
             </tr>
                 <?php 
             }

@@ -157,7 +157,7 @@ class Juno_Review_ProductController extends Mage_Review_ProductController
     public function postAction()
     {
         echo "post";
-        exit;
+        // exit;
         if (!$this->_validateFormKey()) {
             // returns to the product item page
             $this->_redirectReferer();
@@ -191,6 +191,17 @@ class Juno_Review_ProductController extends Mage_Review_ProductController
                         ->setStores(array(Mage::app()->getStore()->getId()))
                         ->save();
 
+                    // get review id
+                    $review_id = $review->getId();
+
+                    /**
+                     * Set the product ID
+                     */
+                    $order_item_id = $this->getRequest()->getParam('item_id');
+
+                    $review->addOrderItemReview($review_id,$order_item_id);
+
+                    
                     foreach ($rating as $ratingId => $optionId) {
                         Mage::getModel('rating/rating')
                         ->setRatingId($ratingId)
