@@ -228,7 +228,7 @@ class Mage_Review_Model_Review extends Mage_Core_Model_Abstract
      *
      * @return array
      */
-    public function addOrderItemReview($review_id, $order_item_id)
+    public function addOrderItemReview($review_id, $order_item_id, $customer_id)
     {
         // // get review id
         // $review_id = $review->getId();
@@ -246,10 +246,34 @@ class Mage_Review_Model_Review extends Mage_Core_Model_Abstract
          * Set the product ID
          */
         // $order_item_id = $this->getRequest()->getParam('item_id');
-        $query = "insert into review_order_entity (order_item_id,review_id) values ('{$order_item_id}', '{$review_id}')" ;
+        $query = "insert into review_order_entity (order_item_id,review_id, customer_id) values ('{$order_item_id}', '{$review_id}', '{$customer_id}')" ;
         /**
          * Execute the query
          */
         $writeConnection->query($query);
     }
+
+    //返回已评论的order_item_id
+    public function getOrderItemReviews($customer_id)
+    {
+        /**
+         * Get the resource model
+         */
+        $resource = Mage::getSingleton('core/resource');
+        
+        /**
+         * Retrieve the read connection
+         */
+        $readConnection = $resource->getConnection('core_read');
+        
+        $query = 'SELECT order_item_id FROM review_order_entity where customer_id = ' . $customer_id;
+        
+        /**
+         * Execute the query and store the results in $results
+         */
+        $results = $readConnection->fetchCol($query);
+
+        return $results;
+    }
+
 }

@@ -193,15 +193,12 @@ class Juno_Review_ProductController extends Mage_Review_ProductController
 
                     // get review id
                     $review_id = $review->getId();
-
-                    /**
-                     * Set the product ID
-                     */
+                    $customer_id = Mage::getSingleton('customer/session')->getCustomerId();
                     $order_item_id = $this->getRequest()->getParam('item_id');
 
-                    $review->addOrderItemReview($review_id,$order_item_id);
+                    $review->addOrderItemReview($review_id,$order_item_id,$customer_id);
 
-                    
+
                     foreach ($rating as $ratingId => $optionId) {
                         Mage::getModel('rating/rating')
                         ->setRatingId($ratingId)

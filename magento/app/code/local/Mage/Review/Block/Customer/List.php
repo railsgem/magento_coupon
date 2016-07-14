@@ -72,8 +72,14 @@ class Mage_Review_Block_Customer_List extends Mage_Customer_Block_Account_Dashbo
         $order = Mage::getModel("sales/order")->load($order_id); //load order by order id 
         $ordered_items = $order->getAllVisibleItems();
         $incrementId = $order->getIncrementId();
-
+        // //已评论的order_items
+        $customer_id = Mage::getSingleton('customer/session')->getCustomer()->getId();
+        $reviewed_items = Mage::getModel('review/review')->getOrderItemReviews($customer_id);
+        // exit;
         foreach($ordered_items as $item){     //item detail
+            if (in_array($item->getItemId(), $reviewed_items)){
+                continue;
+            }
             $product_id = $item->getProductId();
             $_product = Mage::getModel('catalog/product')->load($product_id);
             $order_detail = array();
@@ -92,6 +98,18 @@ class Mage_Review_Block_Customer_List extends Mage_Customer_Block_Account_Dashbo
         return $order_detail_list;
     }
 
+    public function getOrderUnReviewedItem($customer_id)
+    {
+        $order_detail_list = $this->getOrderDetailById($order_id);
+
+    }
+
+    public function getOrderReviewedItems($customer_id)
+    {
+        //已评论的order_items
+        $reviewed_items = Mage::getModel('review/review')->getOrderItemReviews($customer_id);
+        return $reviewed_items;
+    }
     /**
      * Gets collection items count
      *
