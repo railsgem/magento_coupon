@@ -173,4 +173,10 @@ class Mage_Catalog_ProductController extends Mage_Core_Controller_Front_Action
          */
         $this->_forward('noRoute');
     }
+
+    public function testAction()
+    {
+        echo "testestsetests";
+        exit;
+    }
 }

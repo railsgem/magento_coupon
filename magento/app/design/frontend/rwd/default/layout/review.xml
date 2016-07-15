@@ -143,16 +143,4 @@ Product reviews page
         </reference>
     </review_customer_view>
 
-    <review_customer_new translate="label">
-        <label>Create new review</label>
-        <update handle="customer_account"/>
-        <reference name="my.account.wrapper">
-            <block type="review/form" name="product.review.form2" as="review_form2">
-                <block type="page/html_wrapper" name="product.review.form.fields.before2" as="form_fields_before2" translate="label">
-                    <label>Review Form Fields Before</label>
-                    <action method="setMayBeInvisible"><value>1</value></action>
-                </block>
-            </block>
-        </reference>
-    </review_customer_new>
 </layout>
