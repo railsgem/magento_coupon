@@ -280,7 +280,7 @@ class MageWorkshop_DetailedReview_ProductController extends Mage_Review_ProductC
                         $responseJson['html'] = $this->_escapeTags($html);
                     }
                 }
-                $responseJson['redirect'] = $this->_getRefererUrl();
+                $responseJson['redirect'] = $this->_redirect('review/customer');//$this->_getRefererUrl();
                 $this->_wrapMessages($responseJson);
                 $this->getResponse()
                     ->setBody($this->_escapeTags($helperJson->jsonEncode($responseJson)));
