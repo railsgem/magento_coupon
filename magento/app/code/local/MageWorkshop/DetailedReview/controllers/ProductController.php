@@ -216,6 +216,13 @@ class MageWorkshop_DetailedReview_ProductController extends Mage_Review_ProductC
                         'review' => $review
                     ));
 
+                    // get review id
+                    $review_id = $review->getId();
+                    $customer_id = Mage::getSingleton('customer/session')->getCustomerId();
+                    $order_item_id = $this->getRequest()->getParam('item_id');
+
+                    $review->addOrderItemReview($review_id,$order_item_id,$customer_id);
+
                     $review->aggregate();
                     if ($ajaxSubmit) {
                         $responseJson['success'] = true;

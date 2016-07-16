@@ -220,13 +220,43 @@
     
     <review_customer_new translate="label">
         <label>Create new review</label>
+        <reference name="head">
+            <action method="addItem" ifconfig="detailedreview/settings/enable"><type>skin_css</type><name>css/detailedreview/jquery-ui.css</name></action>
+            <action method="addItem" ifconfig="detailedreview/settings/enable"><type>skin_css</type><name>css/detailedreview/jquery.nouislider.min.css</name></action>
+            <action method="addItem" ifconfig="detailedreview/settings/enable"><type>skin_css</type><name>css/detailedreview/pnotify.custom.min.css</name></action>
+            <action method="addItem" ifconfig="detailedreview/settings/enable"><type>skin_js</type><name>js/detailedreview/pnotify.custom.min.js</name></action>
+            <action method="addItem" ifconfig="detailedreview/settings/enable"><type>skin_css</type><name>css/detailedreview/magnific-popup.css</name></action>
+            <action method="addItem" ifconfig="detailedreview/settings/enable"><type>skin_css</type><name>css/detailedreview/ratings.css</name></action>
+            <block type="page/html_head" template="detailedreview/style/css.phtml" />
+        </reference>
         <update handle="customer_account"/>
         <reference name="my.account.wrapper">
-            <block type="review/form" name="product.review.form2" as="review_form2">
-                <block type="page/html_wrapper" name="product.review.form.fields.before2" as="form_fields_before2" translate="label">
+            <block type="detailedreview/review_newform" name="product.review.form" as="review_form" template="detailedreview/review/newform.phtml">
+                    <block type="page/html_wrapper" name="product.review.form.fields.before" as="form_fields_before" translate="label">
+                        <label>Review Form Fields Before</label>
+                        <action method="setMayBeInvisible"><value>1</value></action>
+                    </block>
+                </block>
+
+           <!--  <block type="detailedreview/newform" name="product.review.form" as="review_form">
+                <block type="page/html_wrapper" name="product.review.form.fields.before" as="form_fields_before" translate="label">
                     <label>Review Form Fields Before</label>
                     <action method="setMayBeInvisible"><value>1</value></action>
                 </block>
+            </block> -->
+        </reference>
+         <reference name="before_body_end">
+            <block type="core/template" name="detailedreview_header_include_js">
+                <action method="setTemplate" ifconfig="detailedreview/settings/enable"><template>detailedreview/include_js.phtml</template></action>
+            </block>
+            <block type="detailedreview/js" after="detailedreview_header_include_js" name="detailedreview_header_js">
+                <action method="setTemplate" ifconfig="detailedreview/settings/enable"><template>detailedreview/js_config.phtml</template></action>
+            </block>
+            <block type="detailedreview/js_moment" after="detailedreview_header_js" name="detailedreview_js_moment">
+                <action method="setTemplate" ifconfig="detailedreview/settings/enable"><template>detailedreview/js/moment.phtml</template></action>
+            </block>
+            <block type="core/template" after="detailedreview_header_js" name="detailedreview_header_include_css">
+                <action method="setTemplate" ifconfig="detailedreview/settings/enable"><template>detailedreview/include_css.phtml</template></action>
             </block>
         </reference>
     </review_customer_new>

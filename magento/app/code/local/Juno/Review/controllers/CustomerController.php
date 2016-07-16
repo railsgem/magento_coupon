@@ -76,6 +76,13 @@ class Juno_Review_CustomerController extends Mage_Review_CustomerController
 
     public function newAction()
     {
+        $productId  = (int) $this->getRequest()->getParam('id');
+        $product = Mage::getModel('catalog/product')
+            ->load($productId);
+        // Register current data and dispatch final events
+        Mage::register('current_product', $product);
+        Mage::register('product', $product);
+
         $this->loadLayout();
         if ($navigationBlock = $this->getLayout()->getBlock('customer_account_navigation')) {
             $navigationBlock->setActive('review/customer');
