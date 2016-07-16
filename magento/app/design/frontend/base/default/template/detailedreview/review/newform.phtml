@@ -38,7 +38,7 @@ $isVisible = 'block';//($isSeparateForm && strtolower($this->getRequest()->getAc
             }
         </script>
         <iframe id="upload-img" name="upload-img" style="display: none"></iframe>
-        <form action="<?php echo $this->getAction() ?>" method="post" id="review-form" target="upload-img" enctype="multipart/form-data">
+        <form action="<?php echo $this->getAction() ?>" method="post" id="review-form" >
             <fieldset>
                 <input type="hidden" name="id" value="<?php echo $productID; ?>" />
 

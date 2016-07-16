@@ -292,16 +292,17 @@ class MageWorkshop_DetailedReview_ProductController extends Mage_Review_ProductC
                 $this->getResponse()
                     ->setBody($this->_escapeTags($helperJson->jsonEncode($responseJson)));
             } else {
-                if ($redirectUrl = Mage::getSingleton('review/session')->getRedirectUrl(true)) {
-                    $this->_redirectUrl($redirectUrl);
-                    return $this;
-                }
-                $referrerUrl = $this->_getRefererUrl();
-                if ( preg_match('/.*\&show_popup=1.*/', $referrerUrl) ) {
-                    $this->_redirectUrl(preg_replace('/(.*)\&show_popup=1(.*)/', '$1$2', $referrerUrl));
-                    return $this;
-                }
-                $this->_redirectReferer();
+                $this->_redirect('review/customer');
+                // if ($redirectUrl = Mage::getSingleton('review/session')->getRedirectUrl(true)) {
+                //     $this->_redirectUrl($redirectUrl);
+                //     return $this;
+                // }
+                // $referrerUrl = $this->_getRefererUrl();
+                // if ( preg_match('/.*\&show_popup=1.*/', $referrerUrl) ) {
+                //     $this->_redirectUrl(preg_replace('/(.*)\&show_popup=1(.*)/', '$1$2', $referrerUrl));
+                //     return $this;
+                // }
+                // $this->_redirectReferer();
             }
         }
     }

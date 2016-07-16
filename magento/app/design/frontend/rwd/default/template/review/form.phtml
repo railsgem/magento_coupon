@@ -118,40 +118,7 @@
                     </li>
 
                 </ul>
-                 <?php
-                    $maxSize = Mage::getStoreConfig('detailedreview/image_options/max_image_size');
-                    $minWidth = Mage::getStoreConfig('detailedreview/image_options/min_image_width');
-                    $minHeight = Mage::getStoreConfig('detailedreview/image_options/min_image_height');
-                    ?>
-                    <div class="upload-image">
-                        <div class="left">
-                            <span class="title"><?php echo $this->__("Upload Your Image") ?></span>
-                            <p class="desc"><?php echo $this->__("Pictures speak a thousand words!") ?></p>
-                            <ul class="desc">
-                                <li>- <?php echo $this->__("Image must be in PNG, GIF or JPEG format") ?></li>
-                                <li>- <?php echo $this->__("File size must be %d MB or less", $maxSize) ?></li>
-                                <li>- <?php echo $this->__("Image must be at least %d pixels tall", $minHeight) ?></li>
-                                <li>- <?php echo $this->__("Image must be at least %d pixels wide", $minWidth) ?></li>
-                            </ul>
-                        </div>
-                        <div class="right">
-                            <div class="input-box" id="add-file-input-box">
-                                <div class="more-images">
-                                    <div class="choose-image">
-                                        <span><?php echo $this->__('Choose file'); ?></span>
-                                        <input type="file" name="image[]" class="firstInput image_field" />
-                                    </div>
-                                    <a href="#" class="remove-img"></a>
-                                    <div class="clearboth"></div>
-                                </div>
-                            </div>
-                            <div class="clearboth"></div>
-                            <?php if ((int)Mage::getStoreConfig('detailedreview/image_options/images_max_count') > 1): ?>
-                                <span class="more-images-button"><a href="#" id="add-more-images"><?php echo $this->__("Add More Files"); ?></a></span>
-                            <?php endif ?>
-                        </div>
-                        <div class="clearboth"></div>
-                    </div>
+                 
             </div>
             <div class="buttons-set">
                 <button type="submit" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Submit Review')) ?>" class="button"><span><span><?php echo $this->__('Submit Review') ?></span></span></button>
