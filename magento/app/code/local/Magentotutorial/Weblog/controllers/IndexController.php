@@ -13,6 +13,24 @@ class Magentotutorial_Weblog_IndexController extends Mage_Core_Controller_Front_
 	    $data = $blogpost->getData();
 	    var_dump($data);
     }
-
-
+	public function createNewPostAction() {
+	    $blogpost = Mage::getModel('weblog/blogpost');
+	    $blogpost->setTitle('Code Post!');
+	    $blogpost->setPost('This post was created from code!');
+	    $blogpost->save();
+	    echo 'post with ID ' . $blogpost->getId() . ' created';
+	}
+	public function editFirstPostAction() {
+	    $blogpost = Mage::getModel('weblog/blogpost');
+	    $blogpost->load(1);
+	    $blogpost->setTitle("The First post!");
+	    $blogpost->save();
+	    echo 'post edited';
+	}
+	public function deleteFirstPostAction() {
+	    $blogpost = Mage::getModel('weblog/blogpost');
+	    $blogpost->load(1);
+	    $blogpost->delete();
+	    echo 'post removed';
+	}
 }
