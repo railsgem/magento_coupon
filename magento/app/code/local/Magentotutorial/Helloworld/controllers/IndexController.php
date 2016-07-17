@@ -8,6 +8,11 @@ class Magentotutorial_Helloworld_IndexController extends Mage_Core_Controller_Fr
         $this->loadLayout();
     	$this->renderLayout();
     }
+
+    public function helloAction() {
+
+        echo 'Hello World';
+    }
     public function goodbyeAction() {
 	    echo 'Goodbye World!';
         $this->loadLayout();
