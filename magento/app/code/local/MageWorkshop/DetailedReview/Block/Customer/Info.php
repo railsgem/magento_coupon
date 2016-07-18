@@ -48,6 +48,9 @@ class MageWorkshop_DetailedReview_Block_Customer_Info extends Mage_Core_Block_Te
         $sum = 0;
         /** @var Mage_Catalog_Model_Product $item */
         foreach ($this->getCollection() as $item) {
+            if ($item->getCount() == 0) {
+                continue;
+            }
             $sum += $item->getSum() / (20 * $item->getCount());
         }
         return round($sum / $this->getCollection()->count());
