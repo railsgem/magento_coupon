@@ -175,6 +175,15 @@ class Mage_Adminhtml_Block_Review_Grid extends Mage_Adminhtml_Block_Widget_Grid
             'escape'    => true
         ));
 
+        $this->addColumn('helpful', array(
+            'header'    => Mage::helper('review')->__('热门'),
+            'align'     => 'right',
+            'type'      => 'text',
+            'width'     => '50px',
+            'index'     => 'helpful',
+            'escape'    => true
+        ));
+
         $this->addColumn('action',
             array(
                 'header'    => Mage::helper('adminhtml')->__('Action'),

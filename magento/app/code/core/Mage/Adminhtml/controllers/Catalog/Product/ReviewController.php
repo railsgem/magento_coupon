@@ -166,49 +166,77 @@ class Mage_Adminhtml_Catalog_Product_ReviewController extends Mage_Adminhtml_Con
     }
 
     public function helpfulAction()
-    {
-        if ($reviewId = $this->getRequest()->getParam('id')) {
-            $review = Mage::getModel('review/review')->load($reviewId);
-            $session = Mage::getSingleton('adminhtml/session');
-            if (! $review->getId()) {
-                $session->addError(Mage::helper('catalog')->__('The review was removed by another user or does not exist.'));
-            } else {
-                try {
-                    $review->setIsHelpful("1");
-                    $review->save();
-                    $session->addSuccess(Mage::helper('catalog')->__('设置热门评论成功.'));
-                } catch (Mage_Core_Exception $e) {
-                    $session->addError($e->getMessage());
-                } catch (Exception $e){
-                    $session->addException($e, Mage::helper('catalog')->__('设置热门评论失败.'));
-                }
-            }
+    {   
+        $session = Mage::getSingleton('adminhtml/session');
+        if ($reviewId = $this->getRequest()->getParam('id', false)){
+            /**
+             * Get the resource model
+             */
+            $resource = Mage::getSingleton('core/resource');
+            
+            /**
+             * Retrieve the write connection
+             */
+            $writeConnection = $resource->getConnection('core_write');
 
-            return $this->getResponse()->setRedirect($this->getUrl($this->getRequest()->getParam('ret') == 'pending' ? '*/*/pending' : '*/*/'));
+            /**
+             * Set the product ID
+             */
+            // $order_item_id = $this->getRequest()->getParam('item_id');
+            $query = "update review_detail set helpful = 1 where review_id = {$reviewId}" ;
+            /**
+             * Execute the query
+             */
+            $writeConnection->query($query);
+
+            $query = "insert into review_helpful (review_id, customer_id, is_helpful) values ({$reviewId}, 99999, 1)" ;
+            /**
+             * Execute the query
+             */
+            $writeConnection->query($query);
+
+            $session->addSuccess(Mage::helper('catalog')->__('设置热门评论成功.'));
+
+        } else {
+            $session->addError(Mage::helper('catalog')->__('The review was removed by another user or does not exist.'));
         }
         $this->_redirect('*/*/');
     }
 
     public function unhelpfulAction()
     {
-        if ($reviewId = $this->getRequest()->getParam('id')) {
-            $review = Mage::getModel('review/review')->load($reviewId);
-            $session = Mage::getSingleton('adminhtml/session');
-            if (! $review->getId()) {
-                $session->addError(Mage::helper('catalog')->__('The review was removed by another user or does not exist.'));
-            } else {
-                try {
-                    $review->setIsHelpful("0");
-                    $review->save();
-                    $session->addSuccess(Mage::helper('catalog')->__('移除热门评论成功.'));
-                } catch (Mage_Core_Exception $e) {
-                    $session->addError($e->getMessage());
-                } catch (Exception $e){
-                    $session->addException($e, Mage::helper('catalog')->__('移除热门评论失败.'));
-                }
-            }
+        $session = Mage::getSingleton('adminhtml/session');
+        if ($reviewId = $this->getRequest()->getParam('id', false)){
+            /**
+             * Get the resource model
+             */
+            $resource = Mage::getSingleton('core/resource');
+            
+            /**
+             * Retrieve the write connection
+             */
+            $writeConnection = $resource->getConnection('core_write');
 
-            return $this->getResponse()->setRedirect($this->getUrl($this->getRequest()->getParam('ret') == 'pending' ? '*/*/pending' : '*/*/'));
+            /**
+             * Set the product ID
+             */
+            // $order_item_id = $this->getRequest()->getParam('item_id');
+            $query = "update review_detail set helpful = 0 where review_id = {$reviewId}" ;
+            /**
+             * Execute the query
+             */
+            $writeConnection->query($query);
+
+            $query = "delete from review_helpful where review_id = {$reviewId}" ;
+            /**
+             * Execute the query
+             */
+            $writeConnection->query($query);
+
+            $session->addSuccess(Mage::helper('catalog')->__('移除热门评论成功.'));
+
+        } else {
+            $session->addError(Mage::helper('catalog')->__('移除热门评论失败.'));
         }
         $this->_redirect('*/*/');
     }
