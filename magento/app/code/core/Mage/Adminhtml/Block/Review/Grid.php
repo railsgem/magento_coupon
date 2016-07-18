@@ -193,6 +193,30 @@ class Mage_Adminhtml_Block_Review_Grid extends Mage_Adminhtml_Block_Widget_Grid
                             )
                          ),
                          'field'   => 'id'
+                    ),
+                    array(
+                        'caption' => Mage::helper('adminhtml')->__('设为热门'),
+                        'url'     => array(
+                            'base'=>'*/catalog_product_review/helpful',
+                            'params'=> array(
+                                'productId' => $this->getProductId(),
+                                'customerId' => $this->getCustomerId(),
+                                'ret'       => ( Mage::registry('usePendingFilter') ) ? 'pending' : null
+                            )
+                         ),
+                         'field'   => 'id'
+                    ),
+                    array(
+                        'caption' => Mage::helper('adminhtml')->__('取消热门'),
+                        'url'     => array(
+                            'base'=>'*/catalog_product_review/unhelpful',
+                            'params'=> array(
+                                'productId' => $this->getProductId(),
+                                'customerId' => $this->getCustomerId(),
+                                'ret'       => ( Mage::registry('usePendingFilter') ) ? 'pending' : null
+                            )
+                         ),
+                         'field'   => 'id'
                     )
                 ),
                 'filter'    => false,
