@@ -12,7 +12,7 @@
 ?>
 <?php $isInTab = Mage::getStoreConfig('detailedreview/settings/reviews_in_tab') ? ' in-tab' : ''; ?>
 <div class="reviews-wrapper<?php echo $isInTab; ?>">
-    <?php if (!$isCustomerLogged): ?>
+    <?php //if (!$isCustomerLogged): ?>
         <div class="login-dialog-block" style="display: none;">
             <div class="login-dialog-container">
                 <?php echo $this->getChildHtml('customer_form_login');?>
@@ -20,7 +20,7 @@
             </div>
             <div class="clearer"></div>
         </div>
-    <?php endif;?>
+    <?php //endif;?>
 
     <?php echo $this->getChildHtml('review_form'); ?>
 
