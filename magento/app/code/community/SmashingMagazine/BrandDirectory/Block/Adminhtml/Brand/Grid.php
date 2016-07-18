@@ -91,6 +91,22 @@ class SmashingMagazine_BrandDirectory_Block_Adminhtml_Brand_Grid
                     ),
                     'field' => 'id'
                 ),
+                array(
+                    'caption' => $this->_getHelper()->__('Visible'),
+                    'url' => array(
+                        'base' => 'smashingmagazine_branddirectory_admin'
+                                  . '/brand/visibility',
+                    ),
+                    'field' => 'id'
+                ),
+                array(
+                    'caption' => $this->_getHelper()->__('Hidden'),
+                    'url' => array(
+                        'base' => 'smashingmagazine_branddirectory_admin'
+                                  . '/brand/hidden',
+                    ),
+                    'field' => 'id'
+                ),
             ),
             'filter' => false,
             'sortable' => false,

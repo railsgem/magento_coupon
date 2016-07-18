@@ -116,7 +116,64 @@ class SmashingMagazine_BrandDirectory_Adminhtml_BrandController
             'smashingmagazine_branddirectory_admin/brand/index'
         );
     }
-    
+
+    public function visibilityAction()
+    {
+        /**
+         * retrieving existing brand data if an ID was specified,
+         * if not we will have an empty Brand entity ready to be populated.
+         */
+        $brand = Mage::getModel('smashingmagazine_branddirectory/brand');
+        if ($brandId = $this->getRequest()->getParam('id', false)) {
+            $brand->load($brandId);
+
+            if ($brand->getId() < 1) {
+                $this->_getSession()->addError(
+                    $this->__('This brand no longer exists.')
+                );
+                return $this->_redirect(
+                    'smashingmagazine_branddirectory_admin/brand/index'
+                );
+            }
+        }
+        $brand->setVisibility("1");
+        $brand->save();
+        $this->_getSession()->addSuccess(
+                    $this->__('The brand has been visibled.')
+                );
+        return $this->_redirect(
+                    'smashingmagazine_branddirectory_admin/brand/index'
+                );
+    }
+
+    public function hiddenAction()
+    {
+        /**
+         * retrieving existing brand data if an ID was specified,
+         * if not we will have an empty Brand entity ready to be populated.
+         */
+        $brand = Mage::getModel('smashingmagazine_branddirectory/brand');
+        if ($brandId = $this->getRequest()->getParam('id', false)) {
+            $brand->load($brandId);
+
+            if ($brand->getId() < 1) {
+                $this->_getSession()->addError(
+                    $this->__('This brand no longer exists.')
+                );
+                return $this->_redirect(
+                    'smashingmagazine_branddirectory_admin/brand/index'
+                );
+            }
+        }
+        $brand->setVisibility("0");
+        $brand->save();
+        $this->_getSession()->addSuccess(
+                    $this->__('The brand has been hidden.')
+                );
+        return $this->_redirect(
+                    'smashingmagazine_branddirectory_admin/brand/index'
+                );
+    }
     /**
      * Thanks to Ben for pointing out this method was missing. Without 
      * this method the ACL rules configured in adminhtml.xml are ignored.
